@@ -1,0 +1,6 @@
+# .graphclientrc.yml
+sources:
+  - name: adaptersfromgoerli
+    handler:
+      graphql:
+        endpoint: https://api.studio.thegraph.com/query/49446/adaptersfromgoerli/v0.0.1

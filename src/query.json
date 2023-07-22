@@ -1,0 +1,4 @@
+{
+    "query": "query{hashStoreds(first:100,orderBy:TelepathyAdapter_id, orderDirection:desc){id,TelepathyAdapter_id,hashes,blockNumber}ambadapterHashStoreds(first:100,orderBy:AMBAdapter_id, orderDirection:desc){id,AMBAdapter_id,hashes,blockNumber}dendrETHAdapterHashStoreds(first:100,orderBy:DendrETHAdapter_id, orderDirection:desc){id,DendrETHAdapter_id,hashes,blockNumber}sygmaAdapterHashStoreds(first:100,orderBy:SygmaAdapter_id, orderDirection:desc){id,SygmaAdapter_id,hashes,blockNumber}}"
+  }
+  

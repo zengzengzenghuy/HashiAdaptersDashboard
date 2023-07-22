@@ -1,0 +1,14 @@
+query AdapterQuery {
+  hashStoreds(first: 5) {
+    id
+    TelepathyAdapter_id
+    hashes
+    blockNumber
+  }
+  ambadapterHashStoreds(first: 5) {
+    id
+    AMBAdapter_id
+    hashes
+    blockNumber
+  }
+}
