@@ -1,6 +1,4 @@
 import { useState, useEffect } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
 import "./App.css";
 import queryQL from "./query.json";
 // import {getBuiltGraphSDK} from '../.graphclient'
@@ -16,7 +14,6 @@ let amb: adapterDataTpe[] = [];
 let dendrETH: adapterDataTpe[] = [];
 let sygma: adapterDataTpe[] = [];
 function App() {
-  const [count, setCount] = useState(0);
   const [common, setCommon] = useState<any[]>([]);
   const findCommon = (
     arr1: adapterDataTpe[],
@@ -33,7 +30,7 @@ function App() {
           !commonArr.some((obj) => obj.hash === arr1[i].hash)
         ) {
           commonArr.push(arr1[i]);
-          console.log("Common12: ", arr1[i]);
+       
         }
       }
     }
@@ -45,7 +42,7 @@ function App() {
           !commonArr.some((obj) => obj.hash === arr1[i].hash)
         ) {
           commonArr.push(arr1[i]);
-          console.log("Common13: ", arr1[i]);
+         
         }
       }
     }
@@ -57,7 +54,7 @@ function App() {
           !commonArr.some((obj) => obj.hash === arr1[i].hash)
         ) {
           commonArr.push(arr1[i]);
-          console.log("Common14: ", arr1[i]);
+        
         }
       }
     }
@@ -69,7 +66,7 @@ function App() {
           !commonArr.some((obj) => obj.hash === arr2[i].hash)
         ) {
           commonArr.push(arr2[i]);
-          console.log("Common23: ", arr2[i]);
+  
         }
       }
     }
@@ -80,14 +77,9 @@ function App() {
           !commonArr.some((obj) => obj.blockNumber === arr2[i].blockNumber) &&
           !commonArr.some((obj) => obj.hash === arr2[i].hash)
         ) {
-          console.log(
-            "response from 24: check1",
-            arr2[i].blockNumber === arr4[j].blockNumber,
-            " check2:",
-            commonArr.includes(arr2[i])
-          );
+       
           commonArr.push(arr2[i]);
-          console.log("Common24: ", arr2[i]);
+    
         }
       }
     }
@@ -99,7 +91,7 @@ function App() {
           !commonArr.some((obj) => obj.hash === arr3[i].hash)
         ) {
           commonArr.push(arr3[i]);
-          console.log("Common34: ", arr3[i]);
+     
         }
       }
     }
@@ -119,9 +111,10 @@ function App() {
 
   const { data, isLoading, error, refetch } = result;
 
-  // useEffect(()=>{
-  //   findCommon()
-  // },[])
+  useEffect(()=>{
+    refetch;
+    findCommon(amb, telepathy, dendrETH, sygma)
+  },[])
   const tableStyle = {
     border: "1px solid black",
   };
@@ -129,15 +122,20 @@ function App() {
     <>
       <h1>Adapters Dashboard - Built for Hashi</h1>
       <h3>
-        This dashboard shows the most recent common block hash stored in Hashi adapters in
-        Gnosis Chain
+        This dashboard shows the most recent block hash stored by Hashi adapters in
+        Gnosis Chain.
+        <br/>
+        The block is from Goerli. Please verify the block in <a href="https://goerli.etherscan.io/">goerli.etherscan</a>
       </h3>
-      <p>Common Block: Block number of Goerli</p>
+
+      <p>Valid Block: Block number of Goerli that has passed threshold (2 out of 4) from adapters</p>
       <p>
         <button
           type="button"
           onClick={() => {
+            refetch;
             findCommon(amb, telepathy, dendrETH, sygma);
+          
           }}
           disabled={isLoading}
           style={{ backgroundColor: "#4CAF50" }}
@@ -156,7 +154,7 @@ function App() {
         <table style={tableStyle}>
           <thead>
             <tr>
-              <th style={tableStyle}>Common Block</th>
+              <th style={tableStyle}>Valid Block</th>
               <th style={tableStyle}>Block Hash</th>
             </tr>
           </thead>
