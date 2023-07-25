@@ -19,3 +19,8 @@ Frontend: Vite + React
 ## Functionalities
 
 Click **Refresh** button to fetch the most recent 100 blocks stored by each adapters and compute the blocks that has reached threshold (2 out of 4) that are considered valid.
+
+## Reference
+
+1. Hashi docs: https://docs.gnosischain.com/bridges/hashi/
+2. Hashi github: https://github.com/gnosis/hashi

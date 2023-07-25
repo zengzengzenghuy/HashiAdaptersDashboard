@@ -120,7 +120,7 @@ function App() {
   };
   return (
     <>
-      <h1>Adapters Dashboard - Built for Hashi</h1>
+      <h1>Adapters Dashboard - Built for <a href="https://docs.gnosischain.com/bridges/hashi/">Hashi</a></h1>
       <h3>
         This dashboard shows the most recent block hash stored by Hashi adapters in
         Gnosis Chain.
@@ -129,6 +129,7 @@ function App() {
       </h3>
 
       <p>Valid Block: Block number of Goerli that has passed threshold (2 out of 4) from adapters</p>
+     
       <p>
         <button
           type="button"
