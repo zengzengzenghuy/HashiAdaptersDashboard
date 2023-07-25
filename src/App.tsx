@@ -109,7 +109,7 @@ function App() {
   };
   const result = useQuery(["adapterQuery"], fetchQuery);
 
-  const { data, isLoading, error, refetch } = result;
+  const { data, isLoading, refetch } = result;
 
   useEffect(()=>{
     refetch;
@@ -190,7 +190,7 @@ function App() {
             </thead>
             <tbody>
               {data &&
-                data?.data.data.hashStoreds?.map((data: any, index: number) => {
+                data?.data.data.hashStoreds?.map((data: any) => {
                   telepathy.push({
                     blockNumber: data.TelepathyAdapter_id,
                     hash: data.hashes,
@@ -212,7 +212,7 @@ function App() {
             <tbody>
               {data &&
                 data?.data.data.dendrETHAdapterHashStoreds?.map(
-                  (data: any, index: number) => {
+                  (data: any) => {
                     dendrETH.push({
                       blockNumber: data.DendrETHAdapter_id,
                       hash: data.hashes,
@@ -236,7 +236,7 @@ function App() {
             <tbody>
               {data &&
                 data?.data.data.ambadapterHashStoreds?.map(
-                  (data: any, index: number) => {
+                  (data: any) => {
                     amb.push({
                       blockNumber: data.AMBAdapter_id,
                       hash: data.hashes,
@@ -259,7 +259,7 @@ function App() {
             <tbody>
               {data &&
                 data?.data.data.sygmaAdapterHashStoreds?.map(
-                  (data: any, index: number) => {
+                  (data: any) => {
                     sygma.push({
                       blockNumber: data.SygmaAdapter_id,
                       hash: data.hashes,
