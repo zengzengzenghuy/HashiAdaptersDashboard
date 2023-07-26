@@ -1,5 +1,7 @@
 # Hashi Adapters Dashboard
 
+Link to the app: https://hashiadapters-dashboard-tvw47.ondigitalocean.app/
+
 This dashboard shows the most recent blocks that has passed threshold from ShoyuBashi. It also shows the block stored by each adapters.
 
 ## Architecture
