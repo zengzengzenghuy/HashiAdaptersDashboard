@@ -1,0 +1,93 @@
+specVersion: 0.0.5
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum
+    name: TelepathyAdapter
+    network: gnosis
+    source:
+      address: "0x2f1E51a2763FB67fe09971Fd8d849716137A3357"
+      abi: TelepathyAdapter
+      startBlock: 29000000
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - HashStored
+      abis:
+        - name: TelepathyAdapter
+          file: ./abis/TelepathyAdapter.json
+      eventHandlers:
+        - event: HashStored(indexed uint256,indexed bytes32)
+          handler: handleHashStored
+      file: ./src/telepathy-adapter.ts
+  - kind: ethereum
+    name: AMBAdapter
+    network: gnosis
+    source:
+      address: "0x32Cd442309cA6E79Db2194aac61024FBD2B14eb9"
+      abi: AMBAdapter
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - AMBAdapterHashStored
+      abis:
+        - name: AMBAdapter
+          file: ./abis/AMBAdapter.json
+      eventHandlers:
+        - event: HashStored(indexed uint256,indexed bytes32)
+          handler: handleHashStored
+      file: ./src/amb-adapter.ts
+  - kind: ethereum
+    name: SygmaAdapter
+    network: gnosis
+    source:
+      address: "0x9AD7a6f4FDA8247cC0bF5932B68c5b619937dB15"
+      abi: SygmaAdapter
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - SygmaAdapterHashStored
+        - ReporterSet
+        - RoleAdminChanged
+        - RoleGranted
+        - RoleRevoked
+      abis:
+        - name: SygmaAdapter
+          file: ./abis/SygmaAdapter.json
+      eventHandlers:
+        - event: HashStored(indexed uint256,indexed bytes32)
+          handler: handleHashStored
+        - event: ReporterSet(address,uint256,bool)
+          handler: handleReporterSet
+        - event: RoleAdminChanged(indexed bytes32,indexed bytes32,indexed bytes32)
+          handler: handleRoleAdminChanged
+        - event: RoleGranted(indexed bytes32,indexed address,indexed address)
+          handler: handleRoleGranted
+        - event: RoleRevoked(indexed bytes32,indexed address,indexed address)
+          handler: handleRoleRevoked
+      file: ./src/sygma-adapter.ts
+  - kind: ethereum
+    name: DendrETHAdapter
+    network: gnosis
+    source:
+      address: "0x719523EaF5CFd101Ef501C64597613FBB7aEdED9"
+      abi: DendrETHAdapter
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - DendrETHAdapterHashStored
+      abis:
+        - name: DendrETHAdapter
+          file: ./abis/DendrETHAdapter.json
+      eventHandlers:
+        - event: HashStored(indexed uint256,indexed bytes32)
+          handler: handleHashStored
+      file: ./src/dendr-eth-adapter.ts
