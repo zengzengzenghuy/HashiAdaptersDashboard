@@ -1,0 +1,8 @@
+type HashStored @entity(immutable: true) {
+  id: Bytes!
+  Contract_id: BigInt! # uint256
+  hashes: Bytes! # bytes32
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}

@@ -1,0 +1,151 @@
+[
+  {
+    "inputs": [
+      { "internalType": "contract IAMB", "name": "_amb", "type": "address" },
+      { "internalType": "address", "name": "_reporter", "type": "address" },
+      { "internalType": "bytes32", "name": "_chainId", "type": "bytes32" }
+    ],
+    "stateMutability": "nonpayable",
+    "type": "constructor"
+  },
+  {
+    "inputs": [
+      { "internalType": "address", "name": "emitter", "type": "address" }
+    ],
+    "name": "ArrayLengthMissmatch",
+    "type": "error"
+  },
+  {
+    "inputs": [
+      { "internalType": "uint256", "name": "blockNumber", "type": "uint256" },
+      {
+        "internalType": "bytes32",
+        "name": "reportedBlockHash",
+        "type": "bytes32"
+      },
+      {
+        "internalType": "bytes32",
+        "name": "storedBlockHash",
+        "type": "bytes32"
+      }
+    ],
+    "name": "ConflictingBlockHeader",
+    "type": "error"
+  },
+  {
+    "inputs": [
+      { "internalType": "uint256", "name": "length", "type": "uint256" }
+    ],
+    "name": "InvalidBlockHeaderLength",
+    "type": "error"
+  },
+  { "inputs": [], "name": "InvalidBlockHeaderRLP", "type": "error" },
+  {
+    "inputs": [
+      { "internalType": "address", "name": "emitter", "type": "address" },
+      { "internalType": "address", "name": "sender", "type": "address" }
+    ],
+    "name": "UnauthorizedAMB",
+    "type": "error"
+  },
+  {
+    "inputs": [
+      { "internalType": "address", "name": "emitter", "type": "address" },
+      { "internalType": "bytes32", "name": "chainId", "type": "bytes32" }
+    ],
+    "name": "UnauthorizedChainId",
+    "type": "error"
+  },
+  {
+    "inputs": [
+      { "internalType": "address", "name": "emitter", "type": "address" },
+      { "internalType": "address", "name": "reporter", "type": "address" }
+    ],
+    "name": "UnauthorizedHashReporter",
+    "type": "error"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "uint256",
+        "name": "id",
+        "type": "uint256"
+      },
+      {
+        "indexed": true,
+        "internalType": "bytes32",
+        "name": "hashes",
+        "type": "bytes32"
+      }
+    ],
+    "name": "HashStored",
+    "type": "event"
+  },
+  {
+    "inputs": [],
+    "name": "amb",
+    "outputs": [
+      { "internalType": "contract IAMB", "name": "", "type": "address" }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "chainId",
+    "outputs": [{ "internalType": "bytes32", "name": "", "type": "bytes32" }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "uint256", "name": "domain", "type": "uint256" },
+      { "internalType": "uint256", "name": "id", "type": "uint256" }
+    ],
+    "name": "getHashFromOracle",
+    "outputs": [
+      { "internalType": "bytes32", "name": "hash", "type": "bytes32" }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "uint256", "name": "", "type": "uint256" },
+      { "internalType": "uint256", "name": "", "type": "uint256" }
+    ],
+    "name": "hashes",
+    "outputs": [{ "internalType": "bytes32", "name": "", "type": "bytes32" }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "uint256", "name": "chainId", "type": "uint256" },
+      { "internalType": "bytes[]", "name": "blockHeaders", "type": "bytes[]" }
+    ],
+    "name": "proveAncestralBlockHashes",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "reporter",
+    "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "uint256[]", "name": "ids", "type": "uint256[]" },
+      { "internalType": "bytes32[]", "name": "_hashes", "type": "bytes32[]" }
+    ],
+    "name": "storeHashes",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  }
+]
