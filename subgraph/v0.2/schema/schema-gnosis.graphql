@@ -1,0 +1,19 @@
+# Block Relaying
+
+type AMBHeaderAdapterHashStored @entity(immutable: true) {
+  id: Bytes!
+  AMBAdapter_id: BigInt! # uint256
+  hashes: Bytes! # bytes32
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type TelepathyHeaderAdapterHashStored @entity(immutable: true) {
+  id: Bytes!
+  TelepathyAdapter_id: BigInt! # uint256
+  hashes: Bytes! # bytes32
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}

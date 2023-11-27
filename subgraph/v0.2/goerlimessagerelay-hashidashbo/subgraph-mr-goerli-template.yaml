@@ -1,0 +1,27 @@
+specVersion: 0.0.4
+description: Hashi for Goerli- Message Relay
+repository: https://github.com/zengzengzenghuy/HashiAdaptersDashboard
+schema:
+  file: ./schema-goerli.graphql
+dataSources:
+  - name: Yaho
+    kind: ethereum/contract
+    network: goerli
+    source:
+      address: "0xFD1040bb141696c3CeB74B6BaA3Aaf9fAD97099C"
+      abi: Yaho
+      startBlock: 10089034
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - DispatchedMessage
+      abis:
+        - name: Yaho
+          file: ./abis/Yaho.json
+      eventHandlers:
+        - event: MessageDispatched(indexed bytes32,indexed address,indexed uint256,address,bytes)
+          handler: handleMessageDispatched
+          receipt: true
+      file: ./src/yaho.ts

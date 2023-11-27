@@ -1,0 +1,46 @@
+specVersion: 0.0.4
+description: Hashi for Gnosis Chain - Block Header Reporting
+repository: https://github.com/zengzengzenghuy/HashiAdaptersDashboard
+schema:
+  file: ./schema-gnosis.graphql
+dataSources:
+  - name: AMBAdapter
+    kind: ethereum/contract
+    network: gnosis
+    source:
+      address: "0x32Cd442309cA6E79Db2194aac61024FBD2B14eb9"
+      abi: AMBAdapter
+      startBlock: 27773234
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - AMBHeaderAdapterHashStored
+      abis:
+        - name: AMBAdapter
+          file: ./abis/AMBAdapter.json
+      eventHandlers:
+        - event: HashStored(indexed uint256,indexed bytes32)
+          handler: handleBlockHashStored
+      file: ./src/blockHeader/ambAdapter.ts
+  - name: TelepathyAdapter
+    kind: ethereum/contract
+    network: gnosis
+    source:
+      address: "0x2f1E51a2763FB67fe09971Fd8d849716137A3357"
+      abi: TelepathyAdapter
+      startBlock: 27773234
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - TelepathyHeaderAdapterHashStored
+      abis:
+        - name: TelepathyAdapter
+          file: ./abis/TelepathyAdapter.json
+      eventHandlers:
+        - event: HashStored(indexed uint256,indexed bytes32)
+          handler: handleBlockHashStored
+      file: ./src/blockHeader/telepathyAdapter.ts

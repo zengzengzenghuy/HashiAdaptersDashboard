@@ -1,0 +1,49 @@
+# Message Relaying
+
+type DispatchedMessage @entity {
+  id: Bytes!
+  messageId: Bytes!
+  fromAddress: Bytes!
+  toAddress: Bytes!
+  toChainId: BigInt!
+  dispatchData: Bytes!
+}
+
+type AMBMessageRelayed @entity(immutable: true) {
+  id: Bytes!
+  AMBRelayer_id: BigInt! # uint256
+  emitter: Bytes!
+  messageId: Bytes! # bytes32
+  fromAddress: Bytes!
+  toAddress: Bytes!
+  toChainId: BigInt!
+  dispatchData: Bytes!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type WormholeMessageRelayed @entity(immutable: true) {
+  id: Bytes!
+  WormholeRelayer_id: BigInt! # uint256
+  emitter: Bytes!
+  messageId: Bytes! # bytes32
+  fromAddress: Bytes!
+  toAddress: Bytes!
+  toChainId: BigInt!
+  dispatchData: Bytes!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type OptimismMessageRelayed @entity(immutable: true) {
+  id: Bytes!
+  OptimismRelayer_id: BigInt! # uint256
+  emitter: Bytes!
+  messageId: Bytes! # bytes32
+  fromAddress: Bytes!
+  toAddress: Bytes!
+  toChainId: BigInt!
+  dispatchData: Bytes!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
