@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { useTable, usePagination } from 'react-table';
 
 import { PageWithText, Pagination } from '../paginations';
@@ -27,6 +27,7 @@ export default function Table({ columns, data }) {
       data,
       initialState: { pageIndex: 0, pageSize: 10 },
     },
+
     usePagination
   );
 

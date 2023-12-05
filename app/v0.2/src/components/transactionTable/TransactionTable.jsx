@@ -1,32 +1,38 @@
-import { useMemo, useState } from 'react';
-import { Cell } from 'react-table';
+import { useMemo, useState, useContext, useEffect } from 'react';
 import { HiExternalLink } from 'react-icons/hi';
 
 import Table from './Table';
 import { ellipse } from '../../utils/utils';
-import { testData } from '../../utils/dataType';
+import { DataContext } from '../../providers/DataProvider';
 import ethlogo from '../../public/chains/ethereum.png';
 import gnosisLogo from '../../public/chains/gnosis.png';
 
 export default function TransactionTable() {
-  const formateDate = timestamp => {
-    const date = new Date(timestamp);
-    return date.toLocaleDateString('en', {
-      timeStyle: 'medium',
-      dateStyle: 'short',
-    });
-  };
+  const { data, loading, error } = useContext(DataContext);
+
+  if (data) {
+    console.log('has data', data);
+  } else {
+    console.log('error from Table', error);
+  }
+  // const formateDate = timestamp => {
+  //   const date = new Date(timestamp);
+  //   return date.toLocaleDateString('en', {
+  //     timeStyle: 'medium',
+  //     dateStyle: 'short',
+  //   });
+  // };
   const columns = [
     {
       id: '1',
       header: 'ID',
-      accessor: 'hashID',
+      accessor: 'id',
       Cell: props => {
         const { value, row } = { ...props };
         const { hashID } = { ...row.original };
         return (
           <div>
-            <p>{hashID}</p>
+            <p>{ellipse(hashID)}</p>
           </div>
         );
       },
@@ -118,26 +124,22 @@ export default function TransactionTable() {
               <div>
                 <div className="h-7 flex items-center justify-start space-x-2 ">
                   <p className="text-white  font-mono">
-                    {'Block: ' + row.original.hashID}
+                    {'Block: ' + row.original.primaryData}
                   </p>
                 </div>
                 <div className="h-7 flex items-center justify-start space-x-2 ">
                   <p className="text-white  font-mono">
-                    {'Header: ' + row.original.hashID}
+                    {'Header: ' + row.original.secondaryData}
                   </p>
                 </div>
               </div>
             ) : (
               <div>
                 <div className="h-7 flex items-center justify-start space-x-2 ">
-                  <p className="text-white  font-mono">
-                    {'To: ' + row.original.hashID}
-                  </p>
+                  <p className="text-white  font-mono">{'To: '}</p>
                 </div>
                 <div className="h-7 flex items-center justify-start space-x-2 ">
-                  <p className="text-white  font-mono">
-                    {'Calldata: ' + row.original.hashID}
-                  </p>
+                  <p className="text-white  font-mono">{'Calldata: '}</p>
                 </div>
               </div>
             )}
@@ -146,8 +148,18 @@ export default function TransactionTable() {
       },
     },
   ];
-  const headerColumns = useMemo(() => columns);
-
-  const [data, setData] = useState(testData);
-  return <Table columns={headerColumns} data={testData}></Table>;
+  // const headerColumns = useMemo(() => columns);
+  if (data) {
+    console.log('dataTabl ', data);
+  }
+  if (loading) {
+    return <p className="text-white">Loading...</p>;
+  }
+  const [txdata, setTxData] = useState(data);
+  useEffect(() => {
+    setTxData(data);
+    console.log('data from table ', txdata);
+  }, [data]);
+  return <Table columns={columns} data={data} />;
+  // return <></>;
 }
