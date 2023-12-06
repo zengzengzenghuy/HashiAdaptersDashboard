@@ -3,12 +3,18 @@ import React, { Fragment, useEffect, useRef, useState } from 'react';
 import { ChevronDownIcon } from '@heroicons/react/20/solid';
 
 export default function AdaptersFilters(props) {
+  const [selectedAdapter, setSelectedAdapter] = useState(null);
+  useEffect(() => {
+    if (props.isReset === true) {
+      setSelectedAdapter(null);
+    }
+  }, [props.isReset]);
   return (
     <div className="self-center px-2">
       <Menu as="div" className="relative inline-block text-left">
         <div>
-          <Menu.Button className="inline-flex w-full justify-center rounded-md bg-black/20 px-4 py-2 text-sm font-medium text-white hover:bg-black/30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/75">
-            {props.name}
+          <Menu.Button className="inline-flex w-full justify-center rounded-md bg-[#1d2429] px-4 py-2 text-sm font-medium text-white hover:bg-[#205239] focus:outline-none focus-visible:ring-2 focus-visible:ring-white/75">
+            {selectedAdapter === null ? props.name : selectedAdapter}
             <ChevronDownIcon
               className="-mr-1 ml-2 h-5 w-5 text-violet-600 hover:text-violet-100"
               aria-hidden="true"
@@ -32,6 +38,10 @@ export default function AdaptersFilters(props) {
                     className={`${
                       active ? 'bg-gray-900 text-white' : 'text-gray-900'
                     } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
+                    onClick={() => {
+                      props.onFilterChange('AMB');
+                      setSelectedAdapter('Gnosis AMB Bridge');
+                    }}
                   >
                     Gnosis AMB Bridge
                   </button>
@@ -43,7 +53,10 @@ export default function AdaptersFilters(props) {
                     className={`${
                       active ? 'bg-gray-900 text-white' : 'text-gray-900'
                     } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
-                    onClick={() => {}}
+                    onClick={() => {
+                      props.onFilterChange('Telepathy');
+                      setSelectedAdapter('Telepathy');
+                    }}
                   >
                     Telepathy
                   </button>
@@ -55,7 +68,10 @@ export default function AdaptersFilters(props) {
                     className={`${
                       active ? 'bg-gray-900 text-white' : 'text-gray-900'
                     } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
-                    onClick={() => {}}
+                    onClick={() => {
+                      props.onFilterChange('Sygma');
+                      setSelectedAdapter('Sygma');
+                    }}
                   >
                     Sygma
                   </button>
@@ -67,7 +83,10 @@ export default function AdaptersFilters(props) {
                     className={`${
                       active ? 'bg-gray-900 text-white' : 'text-gray-900'
                     } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
-                    onClick={() => {}}
+                    onClick={() => {
+                      props.onFilterChange('CCIP');
+                      setSelectedAdapter('CCIP');
+                    }}
                   >
                     Chainlink CCIP
                   </button>
@@ -79,7 +98,10 @@ export default function AdaptersFilters(props) {
                     className={`${
                       active ? 'bg-gray-900 text-white' : 'text-gray-900'
                     } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
-                    onClick={() => {}}
+                    onClick={() => {
+                      props.onFilterChange('Optimism Bridge');
+                      setSelectedAdapter('Optimism Bridge');
+                    }}
                   >
                     Optimism Native Bridge
                   </button>
@@ -91,9 +113,12 @@ export default function AdaptersFilters(props) {
                     className={`${
                       active ? 'bg-gray-900 text-white' : 'text-gray-900'
                     } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
-                    onClick={() => {}}
+                    onClick={() => {
+                      props.onFilterChange('Connext');
+                      setSelectedAdapter('Connext');
+                    }}
                   >
-                    Cnnext
+                    Connext
                   </button>
                 )}
               </Menu.Item>

@@ -1,5 +1,6 @@
-import { useMemo, useState, useContext, useEffect } from 'react';
+import { useState, useContext } from 'react';
 import { HiExternalLink } from 'react-icons/hi';
+import { FaCopy } from 'react-icons/fa6';
 
 import Table from './Table';
 import { ellipse } from '../../utils/utils';
@@ -9,29 +10,38 @@ import gnosisLogo from '../../public/chains/gnosis.png';
 
 export default function TransactionTable() {
   const { data, loading, error } = useContext(DataContext);
+  const [copiedRowId, setCopiedRowId] = useState(null);
+  // const [txData, setTxData] = useState([]);
 
-  if (data) {
-    console.log('has data', data);
-  } else {
-    console.log('error from Table', error);
+  const handleCopyClick = (dataToCopy, rowId) => {
+    navigator.clipboard
+      .writeText(dataToCopy)
+      .then(() => {
+        setCopiedRowId(rowId);
+        setTimeout(() => {
+          setCopiedRowId(null);
+        }, 2000);
+      })
+      .catch(error => {
+        console.error('Unable to copy to clipboard', error);
+      });
+  };
+
+  if (loading) {
+    return <p className="text-white">Loading...</p>;
   }
-  // const formateDate = timestamp => {
-  //   const date = new Date(timestamp);
-  //   return date.toLocaleDateString('en', {
-  //     timeStyle: 'medium',
-  //     dateStyle: 'short',
-  //   });
-  // };
+
   const columns = [
     {
       id: '1',
       header: 'ID',
       accessor: 'id',
+      width: 100,
       Cell: props => {
-        const { value, row } = { ...props };
+        const { row } = { ...props };
         const { hashID } = { ...row.original };
         return (
-          <div>
+          <div className="w-[20px]">
             <p>{ellipse(hashID)}</p>
           </div>
         );
@@ -41,26 +51,38 @@ export default function TransactionTable() {
       id: '2',
       header: 'Type',
       accessor: 'type',
+      width: 200,
       Cell: props => {
-        const { value, row } = { ...props };
+        const { row } = { ...props };
         const { type } = { ...row.original };
         return (
-          <div>
+          <div className="w-[100px]">
             <p>{type}</p>
           </div>
         );
       },
     },
-    { id: '3', header: 'Adapter', accessor: 'adapter' },
+    {
+      id: '3',
+      header: 'Adapter',
+      accessor: 'adapter',
+      Cell: props => {
+        const { row } = { ...props };
+        const { adapter } = { ...row.original };
+        return <div className="w-[80px]">{adapter}</div>;
+      },
+    },
     {
       id: '5',
       header: 'Source Chain',
-      accessor: 'sourceChain',
+      accessor: row =>
+        `${row.sourceChain.txHash} ${row.sourceChain.chainId} ${row.sourceChain.timestamp}`,
+      width: 400,
       Cell: props => {
-        const { value, row } = { ...props };
+        const { row } = { ...props };
         const { timestamp, chainId, txHash } = { ...row.original.sourceChain };
         return (
-          <div className="space-y-1.5 mb-3">
+          <div className="space-y-1.5 mb-3 w-[250px]">
             <div className="h-7 flex items-center justify-start space-x-2">
               <p className="text-white  font-mono">{timestamp}</p>
             </div>
@@ -84,14 +106,16 @@ export default function TransactionTable() {
     {
       id: '6',
       header: 'Destination Chain',
-      accessor: 'destinationChain',
+      accessor: row =>
+        `${row.destinationChain.txHash} ${row.destinationChain.chainId} ${row.destinationChain.timestamp}`,
+      width: 400,
       Cell: props => {
         const { value, row } = { ...props };
         const { timestamp, chainId, txHash } = {
           ...row.original.destinationChain,
         };
         return (
-          <div className="space-y-1.5 mb-3">
+          <div className="space-y-1.5 mb-3 w-[250px]">
             <div className="h-7 flex items-center justify-start space-x-2">
               <p className="text-white  font-mono">{timestamp}</p>
             </div>
@@ -115,23 +139,35 @@ export default function TransactionTable() {
     {
       id: '7',
       header: 'Data',
-      accessor: 'data',
+      accessor: row => `${row.primaryData} ${row.secondaryData}`,
+      width: 100,
       Cell: props => {
         const { row } = { ...props };
+        const isCurrentRowCopied = row.id === copiedRowId;
         return (
           <div className="space-y-1.5 mb-3">
             {row.original.type === 'Block Header' ? (
-              <div>
+              <div className="w-[250px] ">
                 <div className="h-7 flex items-center justify-start space-x-2 ">
                   <p className="text-white  font-mono">
                     {'Block: ' + row.original.primaryData}
                   </p>
                 </div>
-                <div className="h-7 flex items-center justify-start space-x-2 ">
+                <div className="h-7 flex items-center justify-start space-x-2">
                   <p className="text-white  font-mono">
-                    {'Header: ' + row.original.secondaryData}
+                    {'Header: ' + ellipse(row.original.secondaryData)}
                   </p>
                 </div>
+                <button
+                  onClick={() =>
+                    handleCopyClick(row.original.secondaryData, row.id)
+                  }
+                >
+                  <FaCopy />
+                </button>
+                {isCurrentRowCopied && (
+                  <span className="text-green-500 ml-2">Copied!</span>
+                )}{' '}
               </div>
             ) : (
               <div>
@@ -148,18 +184,6 @@ export default function TransactionTable() {
       },
     },
   ];
-  // const headerColumns = useMemo(() => columns);
-  if (data) {
-    console.log('dataTabl ', data);
-  }
-  if (loading) {
-    return <p className="text-white">Loading...</p>;
-  }
-  const [txdata, setTxData] = useState(data);
-  useEffect(() => {
-    setTxData(data);
-    console.log('data from table ', txdata);
-  }, [data]);
+
   return <Table columns={columns} data={data} />;
-  // return <></>;
 }

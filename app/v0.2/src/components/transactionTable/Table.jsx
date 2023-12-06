@@ -1,7 +1,7 @@
-import React, { useMemo } from 'react';
-import { useTable, usePagination } from 'react-table';
+import React from 'react';
+import { useTable, usePagination, useGlobalFilter } from 'react-table';
 
-import { PageWithText, Pagination } from '../paginations';
+import SearchBar from '../SearchBar';
 
 export default function Table({ columns, data }) {
   // Use the useTable Hook to send the columns and data to build the table
@@ -15,8 +15,8 @@ export default function Table({ columns, data }) {
     canPreviousPage,
     canNextPage,
     pageOptions,
-    state: { pageIndex, pageSize, selectedRowIds },
-
+    state: { pageIndex, pageSize, selectedRowIds, globalFilter },
+    setGlobalFilter,
     pageCount,
     gotoPage,
     nextPage,
@@ -25,62 +25,53 @@ export default function Table({ columns, data }) {
     {
       columns,
       data,
-      initialState: { pageIndex: 0, pageSize: 10 },
+      initialState: { pageIndex: 0, pageSize: 50 },
     },
-
+    useGlobalFilter,
     usePagination
   );
 
   return (
     <>
-      <table
-        {...getTableProps()}
-        className="w-full table-auto block lg:inline-table overflow-x-scroll"
-      >
+      <SearchBar filter={globalFilter} setFilter={setGlobalFilter} />
+      <table {...getTableProps()} className="w-full">
         <thead>
-          {headerGroups.map(headerGroup => {
-            const { key, ...restHeaderGroupProps } =
-              headerGroup.getHeaderGroupProps();
-            return (
-              <tr key={key} {...restHeaderGroupProps} className=" bg-[#252526]">
-                {headerGroup.headers.map(column => {
-                  const { key, ...restColumn } = column.getHeaderProps();
-                  return (
-                    <th
-                      key={key}
-                      {...restColumn}
-                      className="text-left px-2 py-3 uppercase leading-4 text-xs font-semibold text-white font-mono"
-                    >
-                      {column.render('header')}
-                    </th>
-                  );
-                })}
-              </tr>
-            );
-          })}
+          {headerGroups.map(headerGroup => (
+            <tr
+              key={headerGroup.id}
+              {...headerGroup.getHeaderGroupProps()}
+              className="bg-[#252526]"
+            >
+              {headerGroup.headers.map(column => (
+                <th
+                  key={column.id}
+                  {...column.getHeaderProps()}
+                  className="text-left px-3 py-3 uppercase leading-4 text-xs font-semibold text-white font-mono"
+                >
+                  {column.render('header')}
+                </th>
+              ))}
+            </tr>
+          ))}
         </thead>
         <tbody {...getTableBodyProps} className="border-0 border-none">
           {page.map(row => {
             prepareRow(row);
-            const { key, ...restRowProps } = row.getRowProps();
             return (
               <tr
-                key={key}
-                {...restRowProps}
+                key={row.id}
+                {...row.getRowProps()}
                 className="hover:bg-slate-800 dark:hover:bg-slate-800"
               >
-                {row.cells.map(cell => {
-                  const { key, ...restCellProps } = cell.getCellProps();
-                  return (
-                    <td
-                      key={key}
-                      {...restCellProps}
-                      className=" px-3 py-2 whitespace-nowrap align-top text-white"
-                    >
-                      {cell.render('Cell')}
-                    </td>
-                  );
-                })}
+                {row.cells.map(cell => (
+                  <td
+                    key={cell.id}
+                    {...cell.getCellProps()}
+                    className="px-3 py-3 whitespace-nowrap align-top text-white"
+                  >
+                    {cell.render('Cell')}
+                  </td>
+                ))}
               </tr>
             );
           })}
@@ -118,19 +109,6 @@ export default function Table({ columns, data }) {
         >
           {'>>'}{' '}
         </button>
-        {/* <span className="text-white">
-          | Go to Page: {''}
-          <input
-            type="number"
-            defaultValue={pageIndex + 1}
-            onChange={e => {
-              const pageNumber = e.target.value
-                ? Number(e.target.value) - 1
-                : 0;
-              gotoPage(pageNumber);
-            }}
-          />
-        </span> */}
       </div>
     </>
   );

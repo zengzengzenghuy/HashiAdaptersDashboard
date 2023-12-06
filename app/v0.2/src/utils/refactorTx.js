@@ -1,3 +1,4 @@
+import { timestampToDate } from './utils';
 export function refactorTx(data) {
   const factoredData = [];
 
@@ -11,7 +12,7 @@ export function refactorTx(data) {
         secondaryData: item.hashes,
         destinationChain: {
           txHash: item.transactionHash,
-          timestamp: item.blockTimestamp,
+          timestamp: timestampToDate(item.blockTimestamp),
           chainId: 'Gnosis Chain',
         },
         sourceChain: {
@@ -32,7 +33,7 @@ export function refactorTx(data) {
         secondaryData: item.hashes,
         destinationChain: {
           txHash: item.transactionHash,
-          timestamp: item.blockTimestamp,
+          timestamp: timestampToDate(item.blockTimestamp),
           chainId: 'Gnosis Chain',
         },
         sourceChain: {
@@ -44,7 +45,16 @@ export function refactorTx(data) {
     });
   }
   factoredData.sort((a, b) => {
-    return b.destinationChain.timestamp - a.destinationChain.timestamp;
+    const dateA = a.destinationChain.timestamp;
+    const dateB = b.destinationChain.timestamp;
+
+    if (dateA > dateB) {
+      return -1;
+    }
+    if (dateA < dateB) {
+      return 1;
+    }
+    return 0;
   });
   return factoredData;
 }

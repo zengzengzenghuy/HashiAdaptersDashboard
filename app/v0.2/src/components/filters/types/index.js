@@ -3,12 +3,18 @@ import React, { Fragment, useEffect, useRef, useState } from 'react';
 import { ChevronDownIcon } from '@heroicons/react/20/solid';
 
 export default function TypeFilters(props) {
+  const [selectedType, setSelectedType] = useState(null);
+  useEffect(() => {
+    if (props.isReset === true) {
+      setSelectedType(null);
+    }
+  }, [props.isReset]);
   return (
     <div className="self-center px-2">
       <Menu as="div" className="relative inline-block text-left">
         <div>
-          <Menu.Button className="inline-flex w-full justify-center rounded-md bg-black/20 px-4 py-2 text-sm font-medium text-white hover:bg-black/30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/75">
-            {props.name}
+          <Menu.Button className="inline-flex w-full justify-center rounded-md bg-[#1d2429] px-4 py-2 text-sm font-medium text-white hover:bg-[#205239] focus:outline-none focus-visible:ring-2 focus-visible:ring-white/75">
+            {selectedType == null ? props.name : selectedType}
             <ChevronDownIcon
               className="-mr-1 ml-2 h-5 w-5 text-violet-600 hover:text-violet-100"
               aria-hidden="true"
@@ -36,6 +42,10 @@ export default function TypeFilters(props) {
                     className={`${
                       active ? 'bg-gray-900 text-white' : 'text-gray-900'
                     } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
+                    onClick={() => {
+                      props.onFilterChange('Block Header');
+                      setSelectedType('Block Header');
+                    }}
                   >
                     Block Header
                   </button>
@@ -48,7 +58,8 @@ export default function TypeFilters(props) {
                       active ? 'bg-gray-900 text-white' : 'text-gray-900'
                     } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
                     onClick={() => {
-                      console.log('Messsage Relay');
+                      props.onFilterChange('Message relay');
+                      setSelectedType('Message Relay');
                     }}
                   >
                     Message Relay

@@ -3,12 +3,18 @@ import React, { Fragment, useEffect, useRef, useState } from 'react';
 import { ChevronDownIcon } from '@heroicons/react/20/solid';
 
 export default function ChainsFilters(props) {
+  const [selectedChain, setSelectedChain] = useState(null);
+  useEffect(() => {
+    if (props.isReset === true) {
+      setSelectedChain(null);
+    }
+  }, [props.isReset]);
   return (
     <div className="self-center px-2">
       <Menu as="div" className="relative inline-block text-left">
         <div>
-          <Menu.Button className="inline-flex w-full justify-center rounded-md bg-black/20 px-4 py-2 text-sm font-medium text-white hover:bg-black/30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/75">
-            {props.name}
+          <Menu.Button className="inline-flex w-full justify-center rounded-md bg-[#1d2429] px-4 py-2 text-sm font-medium text-white hover:bg-[#205239] focus:outline-none focus-visible:ring-2 focus-visible:ring-white/75">
+            {selectedChain === null ? props.name : selectedChain}
             <ChevronDownIcon
               className="-mr-1 ml-2 h-5 w-5 text-violet-600 hover:text-violet-100"
               aria-hidden="true"
@@ -28,7 +34,8 @@ export default function ChainsFilters(props) {
             <div className="px-1 py-1 ">
               <Menu.Item
                 onClick={() => {
-                  console.log('Block Header');
+                  props.onFilterChange('Ethereum');
+                  setSelectedChain('Ethereum');
                 }}
               >
                 {({ active }) => (
@@ -59,7 +66,8 @@ export default function ChainsFilters(props) {
                       active ? 'bg-violet-500 text-white' : 'text-gray-900'
                     } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
                     onClick={() => {
-                      console.log('Messsage Relay');
+                      props.onFilterChange('Gnosis Chain');
+                      setSelectedChain('Gnosis Chain');
                     }}
                   >
                     {active ? (
@@ -84,7 +92,8 @@ export default function ChainsFilters(props) {
                       active ? 'bg-violet-500 text-white' : 'text-gray-900'
                     } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
                     onClick={() => {
-                      console.log('Messsage Relay');
+                      props.onFilterChange('Polygon');
+                      setSelectedChain('Polygon');
                     }}
                   >
                     {active ? (
@@ -109,7 +118,8 @@ export default function ChainsFilters(props) {
                       active ? 'bg-violet-500 text-white' : 'text-gray-900'
                     } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
                     onClick={() => {
-                      console.log('Messsage Relay');
+                      props.onFilterChange('BNB Chain');
+                      setSelectedChain('BNB Chain');
                     }}
                   >
                     {active ? (
@@ -134,7 +144,8 @@ export default function ChainsFilters(props) {
                       active ? 'bg-violet-500 text-white' : 'text-gray-900'
                     } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
                     onClick={() => {
-                      console.log('Messsage Relay');
+                      props.onFilterChange('Optimism');
+                      setSelectedChain('Optimism');
                     }}
                   >
                     {active ? (
@@ -159,7 +170,8 @@ export default function ChainsFilters(props) {
                       active ? 'bg-violet-500 text-white' : 'text-gray-900'
                     } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
                     onClick={() => {
-                      console.log('Messsage Relay');
+                      props.onFilterChange('Arbitrum');
+                      setSelectedChain('Arbitrum');
                     }}
                   >
                     {active ? (
@@ -174,6 +186,32 @@ export default function ChainsFilters(props) {
                       />
                     )}
                     Arbitrum
+                  </button>
+                )}
+              </Menu.Item>
+              <Menu.Item>
+                {({ active }) => (
+                  <button
+                    className={`${
+                      active ? 'bg-violet-500 text-white' : 'text-gray-900'
+                    } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
+                    onClick={() => {
+                      props.onFilterChange('Goerli');
+                      setSelectedChain('Goerli');
+                    }}
+                  >
+                    {active ? (
+                      <DuplicateActiveIcon
+                        className="mr-2 h-5 w-5"
+                        aria-hidden="true"
+                      />
+                    ) : (
+                      <DuplicateInactiveIcon
+                        className="mr-2 h-5 w-5"
+                        aria-hidden="true"
+                      />
+                    )}
+                    Goerli
                   </button>
                 )}
               </Menu.Item>
