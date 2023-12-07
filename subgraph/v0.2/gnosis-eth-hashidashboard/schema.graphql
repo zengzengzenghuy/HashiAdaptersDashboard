@@ -1,0 +1,44 @@
+type AMBBHHashStored @entity(immutable: true) {
+  id: Bytes!
+  blockNumberStored: BigInt! # uint256
+  hashes: Bytes! # bytes32
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type AMBMRHashStored @entity(immutable: true) {
+  id: Bytes!
+  messageId: BigInt! # uint256
+  hashes: Bytes! # bytes32
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type TelepathyBHHashStored @entity(immutable: true) {
+  id: Bytes!
+  blockNumberStored: BigInt! # uint256
+  hashes: Bytes! # bytes32
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type SygmaBHHashStored @entity(immutable: true) {
+  id: Bytes!
+  blockNumberStored: BigInt! # uint256
+  hashes: Bytes! # bytes32
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type ConnextBHHashStored @entity(immutable: true) {
+  id: Bytes!
+  blockNumberStored: BigInt! # uint256
+  hashes: Bytes! # bytes32
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}

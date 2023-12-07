@@ -1,0 +1,17 @@
+*.log
+*.swp
+*.txt
+
+# Custom build
+.subgraph.yaml
+.env
+
+# Graph cli generated
+build/
+generated/
+subgraph.yaml
+data/
+src/config/*.ts
+
+# npm
+node_modules

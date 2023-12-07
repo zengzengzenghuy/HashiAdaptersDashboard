@@ -1,0 +1,87 @@
+[
+  {
+    "inputs": [
+      {
+        "internalType": "contract ICrossDomainMessenger",
+        "name": "l1CrossDomainMessenger_",
+        "type": "address"
+      },
+      {
+        "internalType": "contract IHeaderStorage",
+        "name": "headerStorage_",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "nonpayable",
+    "type": "constructor"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "emitter",
+        "type": "address"
+      },
+      {
+        "indexed": true,
+        "internalType": "uint256",
+        "name": "blockNumber",
+        "type": "uint256"
+      },
+      {
+        "indexed": true,
+        "internalType": "bytes32",
+        "name": "blockHeader",
+        "type": "bytes32"
+      }
+    ],
+    "name": "HeaderReported",
+    "type": "event"
+  },
+  {
+    "inputs": [],
+    "name": "headerStorage",
+    "outputs": [
+      {
+        "internalType": "contract IHeaderStorage",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "l1CrossDomainMessenger",
+    "outputs": [
+      {
+        "internalType": "contract ICrossDomainMessenger",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256[]",
+        "name": "blockNumbers",
+        "type": "uint256[]"
+      },
+      {
+        "internalType": "address",
+        "name": "adapter",
+        "type": "address"
+      }
+    ],
+    "name": "reportHeaders",
+    "outputs": [],
+    "stateMutability": "payable",
+    "type": "function"
+  }
+]

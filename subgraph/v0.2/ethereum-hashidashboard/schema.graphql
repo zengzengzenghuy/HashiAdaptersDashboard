@@ -1,0 +1,17 @@
+type HeaderReported @entity(immutable: true) {
+  id: Bytes!
+  emitter: Bytes! # address
+  blockNumberReported: BigInt! # uint256
+  blockHeader: Bytes! # bytes32
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+type MessageRelayed @entity(immutable: true) {
+  id: Bytes!
+  emitter: Bytes! # address
+  messageId: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
