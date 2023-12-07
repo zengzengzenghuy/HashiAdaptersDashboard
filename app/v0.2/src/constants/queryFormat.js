@@ -62,6 +62,71 @@ export const queryETHGnosisRelayAndReporter = gql`
     }
   }
 `;
+
+export const queryPolygonETHAdapter = gql`
+  {
+    telepathyBHHashStoreds {
+      id
+      blockNumberStored
+      hashes
+      blockNumber
+      blockTimestamp
+      transactionHash
+    }
+    axelarBHHashStoreds {
+      id
+      blockNumberStored
+      hashes
+      blockNumber
+      blockTimestamp
+      transactionHash
+    }
+    celerBHHashStoreds {
+      id
+      blockNumberStored
+      hashes
+      blockNumber
+      blockTimestamp
+      transactionHash
+    }
+  }
+`;
+export const queryOptimismETHAdapter = gql`
+  {
+    axelarBHHashStoreds {
+      id
+      blockNumberStored
+      hashes
+      blockNumber
+      blockTimestamp
+      transactionHash
+    }
+    telepathyBHHashStoreds {
+      id
+      blockNumberStored
+      hashes
+      blockNumber
+      blockTimestamp
+      transactionHash
+    }
+    optimismBHHashStoreds {
+      id
+      blockNumberStored
+      hashes
+      blockNumber
+      blockTimestamp
+      transactionHash
+    }
+    optimismMRHashStoreds {
+      id
+      messageId
+      hashes
+      blockNumber
+      blockTimestamp
+      transactionHash
+    }
+  }
+`;
 export const queryGnosisGoerliBlockHeaderAdapter = gql`
   query {
     ambheaderAdapterHashStoreds(first: 100) {

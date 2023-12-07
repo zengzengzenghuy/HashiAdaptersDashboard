@@ -8,5 +8,11 @@
   "100": {
     "goerli-block-header-adapter": "https://api.studio.thegraph.com/query/59639/gnossis-hashidashboard/version/latest",
     "eth-adapter": "https://api.studio.thegraph.com/query/59639/gnosis-eth-hashidashboard/version/latest"
+  },
+  "137": {
+    "eth-adapter": "https://api.studio.thegraph.com/query/59639/polygon-eth-hashidashboard/version/latest"
+  },
+  "10": {
+    "eth-adapter": "https://api.studio.thegraph.com/query/59639/optimism-eth-hashidashboard/version/latest"
   }
 }

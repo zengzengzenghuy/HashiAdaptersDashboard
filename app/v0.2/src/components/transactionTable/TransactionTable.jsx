@@ -7,7 +7,27 @@ import { ellipse } from '../../utils/utils';
 import { DataContext } from '../../providers/DataProvider';
 import ethlogo from '../../public/chains/ethereum.png';
 import gnosisLogo from '../../public/chains/gnosis.png';
+import optimismLogo from '../../public/chains/optimism.png';
+import polygonLogo from '../../public/chains/polygon.png';
 
+const getChainLogo = chainId => {
+  switch (chainId) {
+    case 'Ethereum':
+      return ethlogo;
+
+    case 'Gnosis Chain':
+      return gnosisLogo;
+
+    case 'Optimism':
+      return optimismLogo;
+
+    case 'Polygon':
+      return polygonLogo;
+
+    default:
+      return gnosisLogo;
+  }
+};
 export default function TransactionTable() {
   const { data, loading, error } = useContext(DataContext);
   const [copiedRowId, setCopiedRowId] = useState(null);
@@ -88,7 +108,10 @@ export default function TransactionTable() {
             </div>
             <div className="h-7 flex items-center justify-start space-x-2">
               <p className="text-white font-mono"> {chainId}</p>
-              <img src={ethlogo} className="rounded-full w-5 h-5" />
+              <img
+                src={getChainLogo(chainId)}
+                className="rounded-full w-5 h-5"
+              />
             </div>
             <div className="h-7 flex items-center  justify-startspace-x-2">
               <a
@@ -121,7 +144,10 @@ export default function TransactionTable() {
             </div>
             <div className="h-7 flex items-center justify-start space-x-2">
               <p className="text-white  font-mono"> {chainId}</p>
-              <img src={gnosisLogo} className="rounded-full w-5 h-5" />
+              <img
+                src={getChainLogo(chainId)}
+                className="rounded-full w-5 h-5"
+              />
             </div>
             <div className="h-7 flex items-center justify-start space-x-2">
               <a
