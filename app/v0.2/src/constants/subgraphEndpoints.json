@@ -1,8 +1,12 @@
 {
+  "1": {
+    "reporterAndRelay": " https://api.studio.thegraph.com/query/59639/ethereum-hashidashboard/version/latest"
+  },
   "5": {
     "message-relay-reporter": "https://api.studio.thegraph.com/query/59639/goerlimessagerelay-hashidashbo/version/latest"
   },
   "100": {
-    "block-header-adapter": "https://api.studio.thegraph.com/query/59639/gnossis-hashidashboard/version/latest"
+    "goerli-block-header-adapter": "https://api.studio.thegraph.com/query/59639/gnossis-hashidashboard/version/latest",
+    "eth-adapter": "https://api.studio.thegraph.com/query/59639/gnosis-eth-hashidashboard/version/latest"
   }
 }

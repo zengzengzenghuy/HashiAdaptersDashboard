@@ -92,7 +92,7 @@ export default function TransactionTable() {
             </div>
             <div className="h-7 flex items-center  justify-startspace-x-2">
               <a
-                href={'https://etherscan.io/tx/' + { txHash }}
+                href={`https://etherscan.io/tx/${txHash}`}
                 className="text-white font-mono"
               >
                 {ellipse(txHash)}
@@ -125,7 +125,7 @@ export default function TransactionTable() {
             </div>
             <div className="h-7 flex items-center justify-start space-x-2">
               <a
-                href={'https://etherscan.io/tx/' + { txHash }}
+                href={`https://etherscan.io/tx/${txHash}`}
                 className="text-white font-mono"
               >
                 {ellipse(txHash)}
