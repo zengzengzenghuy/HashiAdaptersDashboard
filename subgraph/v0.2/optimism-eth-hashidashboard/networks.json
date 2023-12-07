@@ -1,0 +1,8 @@
+{
+  "optimism": {
+    "AxelarGMPAdapter": {
+      "address": "0x6E9ce437c46e7fA4F0888c21AAC0d9099Ad133ea",
+      "startBlock": 112011614
+    }
+  }
+}
