@@ -1,0 +1,8 @@
+{
+  "matic": {
+    "TelepathyAdapter": {
+      "address": "0x04413A4795dD1f5347eAD1CD7C76Bd9E5e48b461",
+      "startBlock": 49744477
+    }
+  }
+}
