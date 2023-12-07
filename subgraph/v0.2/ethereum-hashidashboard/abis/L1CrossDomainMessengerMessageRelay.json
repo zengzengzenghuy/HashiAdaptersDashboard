@@ -1,0 +1,87 @@
+[
+  {
+    "inputs": [
+      {
+        "internalType": "contract ICrossDomainMessenger",
+        "name": "l1CrossDomainMessenger_",
+        "type": "address"
+      },
+      {
+        "internalType": "contract IYaho",
+        "name": "yaho_",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "nonpayable",
+    "type": "constructor"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "emitter",
+        "type": "address"
+      },
+      {
+        "indexed": true,
+        "internalType": "uint256",
+        "name": "messageId",
+        "type": "uint256"
+      }
+    ],
+    "name": "MessageRelayed",
+    "type": "event"
+  },
+  {
+    "inputs": [],
+    "name": "l1CrossDomainMessenger",
+    "outputs": [
+      {
+        "internalType": "contract ICrossDomainMessenger",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256[]",
+        "name": "messageIds",
+        "type": "uint256[]"
+      },
+      {
+        "internalType": "address",
+        "name": "adapter",
+        "type": "address"
+      }
+    ],
+    "name": "relayMessages",
+    "outputs": [
+      {
+        "internalType": "bytes32",
+        "name": "receipt",
+        "type": "bytes32"
+      }
+    ],
+    "stateMutability": "payable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "yaho",
+    "outputs": [
+      {
+        "internalType": "contract IYaho",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  }
+]

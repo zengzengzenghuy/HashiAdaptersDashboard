@@ -1,0 +1,136 @@
+[
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "headerStorage",
+        "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "adapterChain",
+        "type": "uint256"
+      },
+      {
+        "internalType": "address",
+        "name": "hyperlaneMailbox",
+        "type": "address"
+      },
+      {
+        "internalType": "uint32",
+        "name": "hyperlaneAdapterChain",
+        "type": "uint32"
+      }
+    ],
+    "stateMutability": "nonpayable",
+    "type": "constructor"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "emitter",
+        "type": "address"
+      },
+      {
+        "indexed": true,
+        "internalType": "uint256",
+        "name": "blockNumber",
+        "type": "uint256"
+      },
+      {
+        "indexed": true,
+        "internalType": "bytes32",
+        "name": "blockHeader",
+        "type": "bytes32"
+      }
+    ],
+    "name": "HeaderReported",
+    "type": "event"
+  },
+  {
+    "inputs": [],
+    "name": "ADAPTER_CHAIN",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "HEADER_STORAGE",
+    "outputs": [
+      {
+        "internalType": "contract HeaderStorage",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "HYPERLANE_ADAPTER_CHAIN",
+    "outputs": [
+      {
+        "internalType": "uint32",
+        "name": "",
+        "type": "uint32"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "HYPERLANE_MAILBOX",
+    "outputs": [
+      {
+        "internalType": "contract IMailbox",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "PROVIDER",
+    "outputs": [
+      {
+        "internalType": "string",
+        "name": "",
+        "type": "string"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256[]",
+        "name": "blockNumbers",
+        "type": "uint256[]"
+      },
+      {
+        "internalType": "address",
+        "name": "adapter",
+        "type": "address"
+      }
+    ],
+    "name": "reportHeaders",
+    "outputs": [],
+    "stateMutability": "payable",
+    "type": "function"
+  }
+]
