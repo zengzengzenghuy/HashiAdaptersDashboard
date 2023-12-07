@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import "./App.css";
 import queryQL from "./query.json";
 // import {getBuiltGraphSDK} from '../.graphclient'
 import { useQuery } from "@tanstack/react-query";
