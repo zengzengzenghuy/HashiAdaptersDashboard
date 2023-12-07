@@ -1,0 +1,17 @@
+type TelepathyBHHashStored @entity(immutable: true) {
+  id: Bytes!
+  blockNumberStored: BigInt! # uint256
+  hashes: Bytes! # bytes32
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type AxelarBHHashStored @entity(immutable: true) {
+  id: Bytes!
+  blockNumberStored: BigInt! # uint256
+  hashes: Bytes! # bytes32
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
