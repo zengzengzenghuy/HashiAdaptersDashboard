@@ -1,0 +1,254 @@
+[
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "reporterChain",
+        "type": "uint256"
+      },
+      {
+        "internalType": "address",
+        "name": "reporterAddress",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "celerBus",
+        "type": "address"
+      },
+      {
+        "internalType": "uint32",
+        "name": "celerReporterChain",
+        "type": "uint32"
+      }
+    ],
+    "stateMutability": "nonpayable",
+    "type": "constructor"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "blockNumber",
+        "type": "uint256"
+      },
+      {
+        "internalType": "bytes32",
+        "name": "reportedBlockHash",
+        "type": "bytes32"
+      },
+      {
+        "internalType": "bytes32",
+        "name": "storedBlockHash",
+        "type": "bytes32"
+      }
+    ],
+    "name": "ConflictingBlockHeader",
+    "type": "error"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "length",
+        "type": "uint256"
+      }
+    ],
+    "name": "InvalidBlockHeaderLength",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "InvalidBlockHeaderRLP",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "UnauthorizedCelerReceive",
+    "type": "error"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "uint256",
+        "name": "id",
+        "type": "uint256"
+      },
+      {
+        "indexed": true,
+        "internalType": "bytes32",
+        "name": "hashes",
+        "type": "bytes32"
+      }
+    ],
+    "name": "HashStored",
+    "type": "event"
+  },
+  {
+    "inputs": [],
+    "name": "CELER_BUS",
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "CELER_REPORTER_CHAIN",
+    "outputs": [
+      {
+        "internalType": "uint32",
+        "name": "",
+        "type": "uint32"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "PROVIDER",
+    "outputs": [
+      {
+        "internalType": "string",
+        "name": "",
+        "type": "string"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "REPORTER_ADDRESS",
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "REPORTER_CHAIN",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "sender",
+        "type": "address"
+      },
+      {
+        "internalType": "uint64",
+        "name": "srcChainId",
+        "type": "uint64"
+      },
+      {
+        "internalType": "bytes",
+        "name": "message",
+        "type": "bytes"
+      },
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "name": "executeMessage",
+    "outputs": [
+      {
+        "internalType": "enum IMessageReceiverApp.ExecutionStatus",
+        "name": "",
+        "type": "uint8"
+      }
+    ],
+    "stateMutability": "payable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "domain",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "id",
+        "type": "uint256"
+      }
+    ],
+    "name": "getHashFromOracle",
+    "outputs": [
+      {
+        "internalType": "bytes32",
+        "name": "hash",
+        "type": "bytes32"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "name": "hashes",
+    "outputs": [
+      {
+        "internalType": "bytes32",
+        "name": "",
+        "type": "bytes32"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "chainId",
+        "type": "uint256"
+      },
+      {
+        "internalType": "bytes[]",
+        "name": "blockHeaders",
+        "type": "bytes[]"
+      }
+    ],
+    "name": "proveAncestralBlockHashes",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  }
+]
