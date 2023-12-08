@@ -1,0 +1,9 @@
+type GoerliAMBHeaderReported @entity(immutable: true) {
+  id: Bytes!
+  emitter: Bytes! # address
+  blockNumberStored: BigInt! # uint256
+  blockHeader: Bytes! # bytes32
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
