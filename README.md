@@ -1,16 +1,22 @@
 # Hashi Adapters Dashboard
 
-Link to the app: https://hashiadapters-dashboard-tvw47.ondigitalocean.app/
+URL: https://hashi-dashboard-v2-app-b46lm.ondigitalocean.app/
 
-This dashboard shows the most recent blocks that has passed threshold from ShoyuBashi. It also shows the block stored by each adapters.
+## Supported Networks
 
-## Architecture
+### Mainnet
 
-Data source: `HashStored()` event is queried by Subgraph and fetched using GraphQL endpoint https://api.studio.thegraph.com/query/49446/adaptersfromgoerli/v0.0.1.
+**Source**: Ethereum  
+**Destination**: Gnosis Chain, Polygon, BNB(WIP), Optimism, Arbitrum, Avalanche
+**Adapter**: Gnosis AMB, Chainlink CCIP, Axelar, Connext, Optimism Bridge, Layer Zero, Hyperlane, Sygma, Celer, Telepathy(Light Client), Wormhole(WIP)
+**Type**: Block Header, Message Relay(WIP)
 
-Frontend: Vite + React
+### Testnet
 
-[GraphClient](https://github.com/graphprotocol/graph-client/tree/main): (to fix) Error when running `yarn graphclient build`.
+Source: Goerli
+Destination: Gnosis Chain
+
+For more details about, check out [deployment](https://hashi-doc.gitbook.io/hashi/v0.1/deployment#v0.1)
 
 ## Run the dashboard
 
@@ -20,9 +26,13 @@ Frontend: Vite + React
 
 ## Functionalities
 
-Click **Refresh** button to fetch the most recent 100 blocks stored by each adapters and compute the blocks that has reached threshold (2 out of 4) that are considered valid.
+1. Transaction Details: Type, Adapter, Source and Destination chain details\*\*, block number and the block header data respectively.
+2. Filter: Filter the transaction by typing the keyword in Search bar, or select the filter dropdowns. You can reset the filter by selecting **Reset** button.
+
+\*\* Light Client based adapter(i.e. Telepathy) don't require transaction initiated from source chain, hence in this situation the source chain detail will show N/A.
+\*\* Apart from the reason above, some transactions will have empty field on destiantion chain, it is because the events listened from subgraph on destination chain adapter contracts don't match with the source chain reporter contract. It is being investigated.
 
 ## Reference
 
-1. Hashi docs: https://docs.gnosischain.com/bridges/hashi/
+1. Hashi docs: https://hashi-doc.gitbook.io/
 2. Hashi github: https://github.com/gnosis/hashi
