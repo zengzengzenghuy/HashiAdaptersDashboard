@@ -1,0 +1,8 @@
+{
+  "goerli": {
+    "AMBHeaderReporter": {
+      "address": "0xeDC0B1D3De4496E0D917af42f29Cb71Eb2982319",
+      "startBlock": 8890272
+    }
+  }
+}
