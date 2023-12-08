@@ -7,7 +7,7 @@ Contract listened:
 3. Optimism Block Header Adapter: `0xe58E7bF7aCD1396D8F9eAF44DB3D4Fd055DCDb51`
 4. Optimism Message Relay Adapter: `0xA144726ED8825E0EEbc126DeDF34FFCc00c03938`
 
-Endpoint: ``
+Endpoint: `https://api.studio.thegraph.com/query/59639/optimism-eth-hashidashboard/version/latest`
 
 Query:
 
