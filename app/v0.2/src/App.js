@@ -17,7 +17,7 @@ function App() {
         <Header />
 
         <Routes>
-          <Route path="/adapters" element={<Adapters />} />
+          {/* <Route path="/adapters" element={<Adapters />} /> */}
           <Route path="/" element={<Home />}>
             {/* <Route index element={<Home />} /> */}
           </Route>

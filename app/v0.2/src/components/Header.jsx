@@ -18,12 +18,12 @@ function Header() {
             Home
           </Link>
 
-          <Link
+          {/* <Link
             to="/adapters"
             className="text-xl font-bold text-[#D8D9DA] font-mono hover:text-blue-600 shadow-inner"
           >
             Adapters
-          </Link>
+          </Link> */}
         </div>
       </div>
     </div>
