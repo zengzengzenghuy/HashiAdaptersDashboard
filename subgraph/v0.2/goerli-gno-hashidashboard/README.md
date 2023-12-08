@@ -6,3 +6,9 @@ Contract listened:
 
 Endpoint:
 `https://api.studio.thegraph.com/query/59639/goerli-gnosis-bh-hashi/version/latest`
+
+Query:
+
+```
+
+```
