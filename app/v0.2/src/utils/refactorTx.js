@@ -22,7 +22,13 @@ export function findAEmitter(chainId, address) {
       break;
     }
     case '5': {
-      return '';
+      const obj = addresses['5'];
+      for (const key in obj) {
+        if (obj[key].toLowerCase() === address) {
+          if (key.toLowerCase().includes('amb')) return 'AMB';
+        }
+      }
+      break;
     }
     case '100': {
       return '';
@@ -32,49 +38,64 @@ export function findAEmitter(chainId, address) {
 export function refactorTx(data) {
   const factoredData = [];
 
-  // if (Object.hasOwn(data, 'ambheaderAdapterHashStoreds')) {
-  //   data.ambheaderAdapterHashStoreds.forEach(item => {
-  //     factoredData.push({
-  //       id: item.AMBAdapter_id,
-  //       type: 'Block Header',
-  //       adapter: 'AMB',
-  //       primaryData: item.blockNumber,
-  //       secondaryData: item.hashes,
-  //       destinationChain: {
-  //         txHash: item.transactionHash,
-  //         timestamp: timestampToDate(item.blockTimestamp),
-  //         chainId: 'Gnosis Chain',
-  //       },
-  //       sourceChain: {
-  //         txHash: '',
-  //         chainId: 'Goerli',
-  //         timestamp: '',
-  //       },
-  //     });
-  //   });
-  // }
-  // if (Object.hasOwn(data, 'telepathyHeaderAdapterHashStoreds')) {
-  //   data.telepathyHeaderAdapterHashStoreds.forEach(item => {
-  //     factoredData.push({
-  //       id: item.TelepathyAdapter_id,
-  //       type: 'Block Header',
-  //       adapter: 'Telepathy',
-  //       primaryData: item.blockNumber,
-  //       secondaryData: item.hashes,
-  //       destinationChain: {
-  //         txHash: item.transactionHash,
-  //         timestamp: timestampToDate(item.blockTimestamp),
-  //         chainId: 'Gnosis Chain',
-  //       },
-  //       sourceChain: {
-  //         txHash: '',
-  //         chainId: 'Goerli',
-  //         timestamp: '',
-  //       },
-  //     });
-  //   });
-  // }
+  if (Object.hasOwn(data, 'goerliAMBHeaderReporteds')) {
+    data.goerliAMBHeaderReporteds.forEach(item => {
+      factoredData.push({
+        id: item.id,
+        type: 'Block Header',
+        adapter: findAEmitter('5', item.emitter),
+        primaryData: item.blockNumberStored,
+        secondaryData: item.blockHeader,
+        destinationChain: {
+          txHash: '',
+          timestamp: '',
+          chainId: '',
+        },
+        sourceChain: {
+          txHash: item.transactionHash,
+          chainId: 'Goerli',
+          timestamp: timestampToDate(item.blockTimestamp),
+        },
+      });
+    });
 
+    if (Object.hasOwn(data, 'ambheaderAdapterHashStoreds')) {
+      factoredData.forEach(item => {
+        const primaryData = item.primaryData;
+        const matchingObject = data.ambheaderAdapterHashStoreds.find(
+          hashStored => hashStored.AMBAdapter_id === primaryData
+        );
+        if (matchingObject) {
+          item.destinationChain.txHash = matchingObject.transactionHash;
+          item.destinationChain.timestamp = timestampToDate(
+            matchingObject.blockTimestamp
+          );
+          item.destinationChain.chainId = 'Gnosis Chain';
+        }
+      });
+    }
+  }
+  if (Object.hasOwn(data, 'telepathyHeaderAdapterHashStoreds')) {
+    data.telepathyHeaderAdapterHashStoreds.forEach(item => {
+      factoredData.push({
+        id: item.id,
+        type: 'Block Header',
+        adapter: 'Telepathy',
+        primaryData: item.TelepathyAdapter_id,
+        secondaryData: item.hashes,
+        destinationChain: {
+          txHash: item.transactionHash,
+          timestamp: timestampToDate(item.blockTimestamp),
+          chainId: 'Gnosis Chain',
+        },
+        sourceChain: {
+          txHash: 'N/A',
+          chainId: 'Goerli',
+          timestamp: 'N/A',
+        },
+      });
+    });
+  }
   if (Object.hasOwn(data, 'headerReporteds')) {
     data.headerReporteds.forEach(item => {
       factoredData.push({
@@ -245,29 +266,67 @@ export function refactorTx(data) {
         }
       });
     }
+    if (Object.hasOwn(data, 'arbitrumaxelarBHHashStoreds')) {
+      factoredData.forEach(item => {
+        const primaryData = item.primaryData;
+        const matchingObject = data.arbitrumaxelarBHHashStoreds.find(
+          hashStored => hashStored.blockNumberStored === primaryData
+        );
+        if (matchingObject) {
+          item.destinationChain.txHash = matchingObject.transactionHash;
+          item.destinationChain.timestamp = timestampToDate(
+            matchingObject.blockTimestamp
+          );
+          item.destinationChain.chainId = 'Artitrum';
+        }
+      });
+    }
+    if (Object.hasOwn(data, 'arbitrumtelepathyBHHashStoreds')) {
+      factoredData.forEach(item => {
+        const primaryData = item.primaryData;
+        const matchingObject = data.arbitrumtelepathyBHHashStoreds.find(
+          hashStored => hashStored.blockNumberStored === primaryData
+        );
+        if (matchingObject) {
+          item.destinationChain.txHash = matchingObject.transactionHash;
+          item.destinationChain.timestamp = timestampToDate(
+            matchingObject.blockTimestamp
+          );
+          item.destinationChain.chainId = 'Arbitrum';
+        }
+      });
+    }
+    if (Object.hasOwn(data, 'avalancheccipbhhashStoreds')) {
+      factoredData.forEach(item => {
+        const primaryData = item.primaryData;
+        const matchingObject = data.avalancheccipbhhashStoreds.find(
+          hashStored => hashStored.blockNumberStored === primaryData
+        );
+        if (matchingObject) {
+          item.destinationChain.txHash = matchingObject.transactionHash;
+          item.destinationChain.timestamp = timestampToDate(
+            matchingObject.blockTimestamp
+          );
+          item.destinationChain.chainId = 'Avalanche';
+        }
+      });
+    }
+    if (Object.hasOwn(data, 'avalanchelayerZeroBHHashStoreds')) {
+      factoredData.forEach(item => {
+        const primaryData = item.primaryData;
+        const matchingObject = data.avalanchelayerZeroBHHashStoreds.find(
+          hashStored => hashStored.blockNumberStored === primaryData
+        );
+        if (matchingObject) {
+          item.destinationChain.txHash = matchingObject.transactionHash;
+          item.destinationChain.timestamp = timestampToDate(
+            matchingObject.blockTimestamp
+          );
+          item.destinationChain.chainId = 'Avalanche';
+        }
+      });
+    }
   }
-
-  // if (Object.hasOwn(data, 'messageRelayeds')) {
-  //   data.messageRelayeds.forEach(item => {
-  //     factoredData.push({
-  //       id: item.id,
-  //       type: 'Message Relay',
-  //       adapter: findAEmitter('1', item.emitter),
-  //       primaryData: item.messageId,
-  //       secondaryData: '',
-  //       destinationChain: {
-  //         txHash: '',
-  //         timestamp: '',
-  //         chainId: '',
-  //       },
-  //       sourceChain: {
-  //         txHash: item.transactionHash,
-  //         chainId: 'Ethereum',
-  //         timestamp: timestampToDate(item.blockTimestamp),
-  //       },
-  //     });
-  //   });
-  // }
 
   factoredData.sort((a, b) => {
     const dateA = a.destinationChain.timestamp;

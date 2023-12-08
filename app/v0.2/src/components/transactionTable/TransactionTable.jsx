@@ -1,4 +1,4 @@
-import { useState, useContext } from 'react';
+import { useState, useContext, useMemo } from 'react';
 import { HiExternalLink } from 'react-icons/hi';
 import { FaCopy } from 'react-icons/fa6';
 
@@ -9,6 +9,10 @@ import ethlogo from '../../public/chains/ethereum.png';
 import gnosisLogo from '../../public/chains/gnosis.png';
 import optimismLogo from '../../public/chains/optimism.png';
 import polygonLogo from '../../public/chains/polygon.png';
+import arbitrumLogo from '../../public/chains/arbitrum.png';
+import avalancheLogo from '../../public/chains/avalanche.png';
+import goerliLogo from '../../public/chains/goerli.png';
+import binanceLogo from '../../public/chains/binance.png';
 
 const getChainLogo = chainId => {
   switch (chainId) {
@@ -24,10 +28,44 @@ const getChainLogo = chainId => {
     case 'Polygon':
       return polygonLogo;
 
+    case 'Arbitrum':
+      return arbitrumLogo;
+
+    case 'Avalanche':
+      return avalancheLogo;
+    case 'Goerli':
+      return goerliLogo;
     default:
       return gnosisLogo;
   }
 };
+
+const getExplorerURL = (chainId, txHash) => {
+  switch (chainId) {
+    case 'Ethereum':
+      return `https://etherscan.io/tx/${txHash}`;
+
+    case 'Gnosis Chain':
+      return `https://gnosisscan.io/tx/${txHash}`;
+
+    case 'Optimism':
+      return `https://optimistic.etherscan.io/tx/${txHash}`;
+
+    case 'Polygon':
+      return `https://polygonscan.com/tx/${txHash}`;
+
+    case 'Arbitrum':
+      return `https://arbiscan.io/tx/${txHash}`;
+
+    case 'Avalanche':
+      return `https://subnets.avax.network/c-chain/tx/${txHash}`;
+    case 'Goerli':
+      return `https://goerli.etherscan.io/tx/${txHash}`;
+    default:
+      return `https://etherscan.io/tx/${txHash}`;
+  }
+};
+
 export default function TransactionTable() {
   const { data, loading, error } = useContext(DataContext);
   const [copiedRowId, setCopiedRowId] = useState(null);
@@ -50,23 +88,10 @@ export default function TransactionTable() {
   if (loading) {
     return <p className="text-white">Loading...</p>;
   }
-
+  if (error) {
+    return <p className="text-white">Error...{error}</p>;
+  }
   const columns = [
-    {
-      id: '1',
-      header: 'ID',
-      accessor: 'id',
-      width: 100,
-      Cell: props => {
-        const { row } = { ...props };
-        const { hashID } = { ...row.original };
-        return (
-          <div className="w-[20px]">
-            <p>{ellipse(hashID)}</p>
-          </div>
-        );
-      },
-    },
     {
       id: '2',
       header: 'Type',
@@ -100,7 +125,9 @@ export default function TransactionTable() {
       width: 400,
       Cell: props => {
         const { row } = { ...props };
-        const { timestamp, chainId, txHash } = { ...row.original.sourceChain };
+        const { timestamp, chainId, txHash } = {
+          ...row.original.sourceChain,
+        };
         return (
           <div className="space-y-1.5 mb-3 w-[250px]">
             <div className="h-7 flex items-center justify-start space-x-2">
@@ -115,7 +142,7 @@ export default function TransactionTable() {
             </div>
             <div className="h-7 flex items-center  justify-startspace-x-2">
               <a
-                href={`https://etherscan.io/tx/${txHash}`}
+                href={getExplorerURL(chainId, txHash)}
                 className="text-white font-mono"
               >
                 {ellipse(txHash)}
@@ -151,7 +178,7 @@ export default function TransactionTable() {
             </div>
             <div className="h-7 flex items-center justify-start space-x-2">
               <a
-                href={`https://etherscan.io/tx/${txHash}`}
+                href={getExplorerURL(chainId, txHash)}
                 className="text-white font-mono"
               >
                 {ellipse(txHash)}

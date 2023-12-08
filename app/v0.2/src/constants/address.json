@@ -42,5 +42,8 @@
   "43114": {
     "lz-eth-bh-adapter": "0x11378C54aA4e2Daf4603f9be86ae0Cb70786682a",
     "ccip-eth-bh-adapter": "0x04413A4795dD1f5347eAD1CD7C76Bd9E5e48b461"
+  },
+  "5": {
+    "amb-gno-HeaderReporter": "0xeDC0B1D3De4496E0D917af42f29Cb71Eb2982319"
   }
 }

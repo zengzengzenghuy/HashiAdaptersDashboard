@@ -127,9 +127,50 @@ export const queryOptimismETHAdapter = gql`
     }
   }
 `;
+
+export const queryArbitrumETHAdapter = gql`
+  query {
+    telepathyBHHashStoreds {
+      id
+      blockNumberStored
+      hashes
+      blockNumber
+      transactionHash
+    }
+    axelarBHHashStoreds {
+      id
+      blockNumberStored
+      hashes
+      blockNumber
+      transactionHash
+    }
+  }
+`;
+
+export const queryAvalancheETHAdapter = gql`
+  query {
+    ccipbhhashStoreds {
+      id
+      blockNumberStored
+      hashes
+      blockNumber
+      blockTimestamp
+      transactionHash
+    }
+    layerZeroBHHashStoreds {
+      id
+      blockNumberStored
+      hashes
+      blockNumber
+      blockTimestamp
+      transactionHash
+    }
+  }
+`;
+
 export const queryGnosisGoerliBlockHeaderAdapter = gql`
   query {
-    ambheaderAdapterHashStoreds(first: 100) {
+    ambheaderAdapterHashStoreds {
       id
       AMBAdapter_id
       hashes
@@ -137,7 +178,7 @@ export const queryGnosisGoerliBlockHeaderAdapter = gql`
       transactionHash
       blockTimestamp
     }
-    telepathyHeaderAdapterHashStoreds(first: 100) {
+    telepathyHeaderAdapterHashStoreds {
       id
       TelepathyAdapter_id
       hashes
@@ -148,6 +189,19 @@ export const queryGnosisGoerliBlockHeaderAdapter = gql`
   }
 `;
 
+export const queryGoerliGnosisBlockHeader = gql`
+  query {
+    goerliAMBHeaderReporteds {
+      id
+      emitter
+      blockNumberStored
+      blockHeader
+      blockNumber
+      blockTimestamp
+      transactionHash
+    }
+  }
+`;
 export const queryGoerliGnosisMessageRelay = gql`
   query {
     dispatchedMessages(first: 5) {

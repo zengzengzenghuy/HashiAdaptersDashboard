@@ -15,7 +15,7 @@ export default function Table({ columns, data }) {
     canPreviousPage,
     canNextPage,
     pageOptions,
-    state: { pageIndex, pageSize, selectedRowIds, globalFilter },
+    state: { pageIndex, pageSize, globalFilter },
     setGlobalFilter,
     pageCount,
     gotoPage,

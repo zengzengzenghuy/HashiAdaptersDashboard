@@ -3,7 +3,8 @@
     "reporterAndRelay": " https://api.studio.thegraph.com/query/59639/ethereum-hashidashboard/version/latest"
   },
   "5": {
-    "message-relay-reporter": "https://api.studio.thegraph.com/query/59639/goerlimessagerelay-hashidashbo/version/latest"
+    "message-relay-reporter": "https://api.studio.thegraph.com/query/59639/goerlimessagerelay-hashidashbo/version/latest",
+    "block-header-reporter": "https://api.studio.thegraph.com/query/59639/goerli-gnosis-bh-hashi/version/latest"
   },
   "100": {
     "goerli-block-header-adapter": "https://api.studio.thegraph.com/query/59639/gnossis-hashidashboard/version/latest",
@@ -14,5 +15,11 @@
   },
   "10": {
     "eth-adapter": "https://api.studio.thegraph.com/query/59639/optimism-eth-hashidashboard/version/latest"
+  },
+  "43114": {
+    "eth-adapter": "https://api.studio.thegraph.com/query/59639/avalanche-eth-hashi/version/latest"
+  },
+  "42161": {
+    "eth-adapter": "https://api.studio.thegraph.com/query/59639/arbitrum-eth-hashidashboard/version/latest"
   }
 }
