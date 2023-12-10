@@ -112,9 +112,9 @@ const fetchData = async () => {
 };
 
 export function useGetData() {
-  // return useQuery('get-data', fetchData, {
-  //   staleTime: 30000, // 10 seconds (data considered fresh for 10 seconds)
-  //   refetchInterval: 30000, // 10 seconds (automatic refetch every 10 seconds)
-  // });
-  return useQuery('get-data', fetchData);
+  return useQuery('get-data', fetchData, {
+    staleTime: 30000, // 60 seconds (data considered fresh for 60 seconds)
+    refetchInterval: 30000, // 60 seconds (automatic refetch every 60 seconds)
+  });
+  // return useQuery('get-data', fetchData);
 }
